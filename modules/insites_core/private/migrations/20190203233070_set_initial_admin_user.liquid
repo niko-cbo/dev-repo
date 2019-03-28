@@ -1,0 +1,3 @@
+{% log "Migration starting - Adding initial Insites user" %}
+{% execute_query 'modules/insites_core/insites_set_initial_administrator' %}
+{% log "default_user@insites.io has been successfully added." %}

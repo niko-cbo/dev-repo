@@ -1,0 +1,28 @@
+---
+slug: insites/api/search-database-item-id.json
+method: get
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign name = context.params.name | replace: "/", "\\/" | default: null -%}
+{%- assign id = context.params.id | downcase | default: null -%}
+{%- assign size = context.params.size | plus: 0 | default: 10 -%}
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign keyword = context.params.keyword | downcase | default: null -%}
+
+{%- query_graph 'modules/insites_database/insites_search_database_item_id',
+    result_name: 'result',
+    database_id: id,
+    name: name,
+    size: size,
+    page: page
+    keyword: keyword -%}
+
+{{ result | json }}

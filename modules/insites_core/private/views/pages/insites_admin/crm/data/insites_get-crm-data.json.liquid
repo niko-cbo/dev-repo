@@ -1,0 +1,17 @@
+---
+slug: insites/api/get-crm-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% if params.id %}
+    {% assign id = params.id | plus: 0  %}
+{% endif %}
+ 
+{% query_graph 'modules/insites_core/insites_get_crm_profile', result_name: 'data', id: id %}
+{{ data | json }}

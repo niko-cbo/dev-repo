@@ -1,0 +1,29 @@
+---
+slug: 404
+searchable: false
+metadata: {
+  insites: "true"
+}
+layout_name: "modules/insites_core/insites_admin/insites_shell"
+---
+
+{%- assign name = '404 - Page Not Found' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<div class="row">
+    <div class="error-wrap large-12 medium-12 small-12 cell text-center vertical-align-middle">
+        <img class="margin-bottom-medium" src="{{ 'modules/insites_core/insites_admin/images/error-404.svg' | asset_url }}" alt="404 Page Not Found" />
+        <h1>404 - Page Not Found</h1>
+        <p>The page you are looking for doesn't exist or another error occurred.</p>
+        <ins-button
+            class="margin-top-small"
+            label="GO BACK"
+            color="solid blue"
+            onclick=window.history.back();            
+        ></ins-button>
+    </div>
+</div>
+
+
+<script>
+</script>

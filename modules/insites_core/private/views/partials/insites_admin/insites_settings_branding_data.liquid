@@ -1,0 +1,24 @@
+{%- comment -%} LIQUID IF instance is subscribed to Settings and Branding Module
+{%- execute_query 'modules/insites_settings_and_branding/insites_get_site_settings', result_name: 'site_settings' -%}
+{%- endcomment -%}
+{%- assign default_logo = 'modules/insites_core/insites_admin/images/Insites_logo.svg' | asset_url -%}
+{%- assign default_icon = 'modules/insites_core/insites_admin/images/insites_logo_icon.svg' | asset_url -%}
+
+{%- assign logo = site_settings.items.results[0].branding_logo.original | default: default_logo -%}
+{%- assign icon = site_settings.items.results[0].branding_favicon.original | default: default_icon -%}
+{%- assign name = site_settings.items.results[0].branding_name | default: 'Insites' -%}
+{%- assign welcome_subheading = site_settings.items.results[0].welcome_subheading | default: "Online Digital Platform" -%}
+{%- assign welcome_heading = site_settings.items.results[0].welcome_heading | default: "Welcome to your Insites Platform" -%}
+{%- assign enable_support = site_settings.items.results[0].enable_support | default: "true" -%}
+{%- if enable_support == 'true' -%} 
+    {%- assign support_url = site_settings.items.results[0].support_url | default: "https://docs.insites.io/" -%}
+{%- else -%}
+    {%- assign support_url = "" -%}
+{%- endif -%}
+{%- content_for 'logo' -%}{{ logo }}{%- endcontent_for -%}
+{%- content_for 'icon' -%}{{ icon }}{%- endcontent_for -%}
+{%- content_for 'name' -%}{{ name }}{%- endcontent_for -%}
+{%- content_for 'welcome_subheading' -%}{{ welcome_subheading }}{%- endcontent_for -%}
+{%- content_for 'welcome_heading' -%}{{ welcome_heading }}{%- endcontent_for -%}
+{%- content_for 'enable_support' -%}{{ enable_support }}{%- endcontent_for -%}
+{%- content_for 'support_url' -%}{{ support_url }}{%- endcontent_for -%}

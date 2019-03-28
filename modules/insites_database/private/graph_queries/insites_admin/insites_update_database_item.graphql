@@ -1,0 +1,10 @@
+mutation insites_update_database_item ($id: ID!, $data: CustomizationInputType!) {
+  	customization_update(
+        id: $id
+        customization: $data			
+    ) {
+    name
+    id
+    properties
+  }  
+}	

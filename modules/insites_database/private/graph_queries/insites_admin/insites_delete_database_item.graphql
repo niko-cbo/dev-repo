@@ -1,0 +1,9 @@
+mutation insites_delete_database_item ($id: ID!) {
+  	customization_delete(
+        id: $id			
+    ) {
+    name
+    id
+    properties
+  }  
+}	

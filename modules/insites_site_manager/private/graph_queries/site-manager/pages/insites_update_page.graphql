@@ -1,0 +1,29 @@
+mutation insites_update_page (
+  $id: ID!, 
+  $slug: String,
+  $content: String,
+  $metadata: HashObject,
+  $layout: String = "",
+  $path: String,
+  $redirect_to: String,
+) {
+  admin_page_update(
+    id: $id,
+    page: {
+      slug: $slug,
+      content :$content,
+      layout_name: $layout,
+      metadata: $metadata
+      format: html,
+      searchable: true,
+      physical_file_path: $path,
+      redirect_to: $redirect_to
+    }
+  ) {
+    id
+    slug
+    physical_file_path
+    metadata,
+    layout: layout_name
+  }   
+}

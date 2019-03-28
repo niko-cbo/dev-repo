@@ -1,0 +1,8 @@
+name: insites_system_fields
+properties:
+- name: key
+  type: string
+- name: value
+  type: string
+- name: is_enabled
+  type: boolean

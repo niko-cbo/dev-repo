@@ -1,0 +1,17 @@
+mutation insites_create_partial (
+  $partial_path: String!, $path: String!, 
+  $body: String, 
+  $format: PageFormat = html) {
+  admin_liquid_partial_create(
+    liquid_partial: {
+      path: $partial_path,
+      body: $body,
+      format: $format,
+      physical_file_path: $path
+    }
+  ) {    
+    id
+    path
+    physical_file_path
+  }   
+}

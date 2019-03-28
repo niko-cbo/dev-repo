@@ -1,0 +1,14 @@
+name: insites_social_links
+properties:
+- name: facebook_link
+  type: string
+- name: youtube_link
+  type: string
+- name: google_plus_link
+  type: string
+- name: twitter_link
+  type: string
+- name: linkedin_link
+  type: string
+- name: instagram_link
+  type: string

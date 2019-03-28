@@ -1,0 +1,18 @@
+query insites_get_database_item_details($id:ID!) {
+   items: customizations(
+    id: $id,
+  ) {
+    total_entries
+    results { 
+      id
+      name
+			human_name
+      created_at
+      updated_at
+      user_id
+      field_label: property(name:"field_label")
+      is_enabled: property(name:"is_enabled")
+      properties
+    }
+  }
+}

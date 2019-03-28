@@ -1,0 +1,14 @@
+name: insites_assets
+custom_attributes:
+- name: physical_path
+  attribute_type: string
+- name: direct_link
+  attribute_type: string
+- name: file_name
+  attribute_type: string
+- name: folder
+  attribute_type: string
+- name: tags
+  attribute_type: array
+- name: is_enabled
+  attribute_type: boolean

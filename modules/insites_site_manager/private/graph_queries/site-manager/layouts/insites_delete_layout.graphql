@@ -1,0 +1,19 @@
+mutation insites_delete_layout ($id: ID!) {
+  admin_liquid_layout_delete(
+    id: $id
+  ) {    
+    id
+    path
+    physical_file_path
+  }   
+}
+
+# mutation insites_delete_layout {
+#   admin_liquid_layout_delete(
+#			id:1234
+#   ) {    
+#     id
+#     path
+#     physical_file_path
+#   }   
+# }

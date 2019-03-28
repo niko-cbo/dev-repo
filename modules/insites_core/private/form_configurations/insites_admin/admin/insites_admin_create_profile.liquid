@@ -1,0 +1,38 @@
+---
+name: insites_admin_create_profile
+resource: User
+resource_owner: anyone
+redirect_to: #
+fields:
+  email:
+    property_options:
+      readonly: true
+  password:
+  name:
+    validation: { presence: true }
+  first_name:
+    validation: { presence: true }
+  last_name:
+    validation: { presence: true }
+  profiles:
+    modules/insites_core/insites_administrator:
+      properties:
+        company:
+        is_enabled: 
+          property_options:
+            default: true
+      enabled:
+        property_options:
+          default: true
+          readonly: true
+      validation:
+        presence: true
+    validation:
+      presence: true
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+<pre id="formConfig" style="display:none">
+  {{ form_builder.system_fields.authenticity_token | json}}
+</pre>

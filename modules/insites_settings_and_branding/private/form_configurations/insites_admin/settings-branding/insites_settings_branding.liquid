@@ -1,0 +1,30 @@
+---
+name: insites_settings_branding
+resource: Customization
+resource_owner: anyone
+configuration:    
+    properties:
+        date_format:
+        time_format:
+        time_zone: 
+        enable_dst:
+        enable_support:
+        support_url:
+        welcome_heading:
+        welcome_subheading:
+        email_name:
+        mail_from:
+        reply_to:
+        branding_name:
+        branding_url:
+    custom_images:    
+        branding_favicon:
+            image:    
+        branding_logo:
+            image:
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{{ form_builder.fields.custom_images | json }}

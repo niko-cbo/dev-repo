@@ -1,0 +1,42 @@
+{%- comment -%} Liquid Check if subscribed to INS Settings & Branding  Module
+<div id="lockScreenWrap" class="unlocked">
+  <form id="unlockForm"
+    novalidate data-abide 
+    data-live-validate="true"
+    onsubmit="event.preventDefault();unlockHandler(this)">
+    
+    <div class="logo-wrap">
+      <img src="{{ logo }}" />
+    </div>
+    <div class="form-body">
+      <h2>Enter your password to retrieve your session</h2>
+
+      <ins-input
+        id="username"
+        label="Username"
+        value="{{g.current_user.email}}"
+        field="email"
+        readonly>
+      </ins-input>
+      
+      <ins-input
+        id="password"
+        label="Password" 
+        field="password">
+      </ins-input>
+
+      <ins-button
+        id="unlockButton"
+        type="submit"
+        icon="icon-unlock"
+        label="Unlock"
+        solid>
+      </ins-button>
+
+      <a href="/admin/login" class="login-link">
+      Or Sign In as a different user
+      </a>
+    </div>
+  </form>
+</div> 
+{%- endcomment -%}

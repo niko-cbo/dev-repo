@@ -1,0 +1,62 @@
+query insites_get_asset_customization ($page: Int, $size: Int, $filter_by: String = "properties.file_name", $keyword: String) {
+  items: customizations ( 
+  	name: "modules/insites_site_manager/insites_assets",
+    query: { 
+      keyword: $keyword,
+      match_type: EXACT, 
+      fields:[
+        {name: $filter_by}
+      ] 
+    }
+    sort: [{name: "updated_at", order: "desc"}],
+    properties:[{name:"is_enabled", value:"true"}],
+    per_page: $size,
+    page: $page
+  ) {
+    total_entries
+    total_pages
+    current_page  
+    per_page
+    page  
+    results {
+      	id
+      	user_id
+        userData: user {
+          user_id: id
+          first_name
+          last_name
+          email
+        }
+      	created_at
+      	updated_at 
+      	physical_path: property(name: "physical_path")
+      	direct_link: property(name: "direct_link")
+      	file_name: property(name: "file_name")
+      	folder: property(name: "folder")
+      	tags: property(name: "tags")        
+      	is_enabled: property(name: "is_enabled")
+    }
+  }
+}
+
+# mutation set_insites_assets {
+#   customization_create(
+#     form_configuration_name: "modules/insites_site_manager/insites_assets",
+#   	customization: {
+#      	 custom_model_type_name: "modules/insites_site_manager/insites_assets"
+#       	properties: [
+#           	{name:"physical_path", value: "/insites_admin/images/Insites_logo.svg"}
+#           	{name:"direct_link", value: "https://uploads.staging.oregon.platform-os.com/instances/81/assets/insites_admin/images/Insites_logo.svg"}
+#           	{name:"file_name", value: "Insites_logo.svg"}
+#         ] 
+#     }
+#   ) {
+#       id
+#       user_id
+#       created_at
+#       physical_path: property(name: "physical_path")
+#       direct_link: property(name: "direct_link")
+#       file_name: property(name: "file_name")
+#       tags: property(name: "tags")
+#   }
+# }

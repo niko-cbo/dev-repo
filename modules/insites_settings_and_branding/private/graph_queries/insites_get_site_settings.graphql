@@ -1,0 +1,33 @@
+query insites_get_site_settings {
+  items: customizations(
+      name: "modules/insites_settings_and_branding/insites_site_settings", 
+      is_deleted: false) {
+        total_entries
+        total_pages
+        has_next_page
+        has_previous_page
+            results {
+                id
+                updated_at
+                date_format: property(name: "date_format")
+                time_format: property(name: "time_format")
+                time_zone: property(name: "time_zone")
+                enable_dst: property(name: "enable_dst")
+                enable_support: property(name: "enable_support")
+                support_url: property(name: "support_url")
+                branding_favicon: custom_image(name: "branding_favicon") {      
+                    original: url(version: "transformed")
+                }
+                branding_logo: custom_image(name: "branding_logo") {      
+                    original: url(version: "transformed")
+                }
+                branding_name: property(name: "branding_name")
+                branding_url: property(name: "branding_url")
+                welcome_heading: property(name: "welcome_heading")
+                welcome_subheading: property(name: "welcome_subheading")
+                email_name: property(name: "email_name")
+                mail_from: property(name: "mail_from")
+                reply_to: property(name: "reply_to")
+            }
+    }
+}

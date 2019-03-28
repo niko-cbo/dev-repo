@@ -1,0 +1,36 @@
+name: insites_site_settings
+custom_attributes:
+  - name: date_format
+    attribute_type: string
+  - name: time_format
+    attribute_type: string
+  - name: time_zone
+    attribute_type: string
+  - name: enable_dst
+    attribute_type: boolean
+  - name: enable_support
+    attribute_type: boolean
+  - name: support_url
+    attribute_type: string
+  - name: branding_favicon
+    attribute_type: photo
+    metadata:
+      Content-Disposition: inline
+  - name: branding_logo
+    attribute_type: photo
+    metadata:
+      Content-Disposition: inline
+  - name: branding_name
+    attribute_type: string
+  - name: branding_url
+    attribute_type: string
+  - name: welcome_heading
+    attribute_type: string
+  - name: welcome_subheading
+    attribute_type: string
+  - name: email_name
+    attribute_type: string
+  - name: mail_from
+    attribute_type: string
+  - name: reply_to
+    attribute_type: string

@@ -1,0 +1,20 @@
+---
+slug: admin/sessions/logout
+format: html
+layout_name: modules/insites_core/insites_admin/insites_session
+searchable: false
+metadata: {
+  insites: "true"
+}
+---
+{%- assign name = 'Insites Admin - Logout' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+{% include_form 'modules/insites_core/insites_admin_sign_out' %}
+
+<script>
+  var submitButton = document.querySelector('[type="submit"]');
+  submitButton.click();
+  sessionStorage.setItem("session_deleted", "success");
+  sessionStorage.removeItem("ins_breadcrumbs");
+</script>

@@ -1,0 +1,51 @@
+query insites_get_database_list (
+  $id: ID,
+  $page: Int,
+  $size: Int,
+  $keyword: String,
+  $sortBy: [ModelSchemasSortInput!] = [{
+      name: {
+        order: ASC
+      }
+    }]) {
+  items: admin_model_schemas(
+    page: $page,
+    per_page: $size,
+    filter: {
+      id: {
+        value: $id
+      }
+      parameterized_name: {
+        contains: $keyword,
+        not_starts_with: "modules/insites_"
+      }
+      name: {
+        contains: $keyword,
+        not_starts_with: "modules/insites_"
+      }
+    }
+    sort: $sortBy
+  ) {
+    total_entries
+    current_page
+    per_page
+    has_next_page
+    has_previous_page
+    total_pages
+    results {
+      id
+      name
+      physical_file_path
+      metadata
+      database_fields: properties {
+        id
+        name
+        attribute_type    
+        metadata  
+        default_value
+        target_type
+        target_id
+      }
+    }
+  }  
+}

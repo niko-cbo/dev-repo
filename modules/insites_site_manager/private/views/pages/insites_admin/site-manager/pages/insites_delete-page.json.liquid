@@ -1,0 +1,21 @@
+---
+slug: insites/api/delete-page
+format: json
+method: post
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign id = "" %}
+
+{% if context.params.id %}
+    {% assign id = context.params.id | plus: 0 %}
+{% endif %}
+
+{% execute_query 'modules/insites_site_manager/insites_delete_page', result_name: 'page', id: id, %}
+{{ page | json }}

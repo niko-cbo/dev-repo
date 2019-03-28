@@ -1,0 +1,40 @@
+query insites_get_assets_by_folder ($page: Int, $size: Int, $keyword: String) {
+  items: customizations ( 
+  	name: "modules/insites_site_manager/insites_assets",
+    query: { 
+      keyword: $keyword,
+      match_type: EXACT, 
+      fields:[
+        {name: "properties.folder.raw"}
+      ]
+    }  
+    sort: [{name: "properties.folder", order: "asc"}],
+    properties:[{name:"is_enabled", value:"true"}],
+    per_page: $size,
+    page: $page
+  ) {
+    total_entries
+    total_pages
+    current_page  
+    per_page
+    page  
+    results {
+      	id
+      	user_id
+        userData: user {
+          user_id: id
+          first_name
+          last_name
+          email
+        }
+      	created_at
+      	updated_at 
+      	physical_path: property(name: "physical_path")
+      	direct_link: property(name: "direct_link")
+      	file_name: property(name: "file_name")
+      	folder: property(name: "folder")
+      	tags: property(name: "tags")
+      	is_enabled: property(name: "is_enabled")
+    }
+  }
+}

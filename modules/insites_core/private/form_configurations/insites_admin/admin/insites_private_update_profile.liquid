@@ -1,0 +1,32 @@
+---
+name: insites_private_update_profile
+resource: User
+resource_owner: anyone
+redirect_to: #
+fields:
+  email:
+    property_options:
+      readonly: true
+  name:
+  password:
+  first_name:
+  last_name:
+  profiles:
+    modules/insites_core/insites_administrator:
+      properties:
+        is_enabled:
+            property_options:
+                default: true
+        company:
+    modules/insites_core/insites_contact_number:
+      properties:
+        home_phone_country_code:
+        home_phone_area_code:
+        home_phone_number:
+        work_phone_country_code:
+        work_phone_area_code:
+        work_phone_number:
+        mobile_phone_country_code:
+        mobile_phone_area_code:
+        mobile_phone_number:
+---

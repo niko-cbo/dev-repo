@@ -1,0 +1,19 @@
+---
+slug: insites/api/get-database-item-details.json
+method: get
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | parse_json | default: null -%}
+{%- query_graph 'modules/insites_database/insites_get_database_item_details',
+    result_name: 'result',
+    id: id -%}
+
+{{ result | json }}

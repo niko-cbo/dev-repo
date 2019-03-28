@@ -1,0 +1,85 @@
+{%- include 'modules/insites_core/insites_admin/constants' -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />  
+  <meta name="description" content="{{ desc }}">
+  <meta content="{{ context.authenticity_token }}" name="csrf-token">
+  <title>{{ pagetitle }}</title>
+	{%- include 'modules/insites_core/insites_admin/dependencies' -%}
+</head>
+<style>
+  .marginBottom {
+    position: relative;
+    display: block;
+    bottom: 125px;
+  }
+</style>
+<body class="sign-in-wrapper">
+  {%- include 'modules/insites_core/insites_admin/insites_settings_branding_data' -%}
+  {%- capture logo -%}{%- yield 'logo' -%}{%- endcapture -%}
+  {%- capture name -%}{%- yield 'name' -%}{%- endcapture -%}
+  {%- capture welcome_heading -%}{%- yield 'welcome_heading' -%}{%- endcapture -%}
+  {%- capture welcome_subheading -%}{%- yield 'welcome_subheading' -%}{%- endcapture -%}
+
+  {%- include 'modules/insites_core/insites_admin/insites_global_content_data' -%}
+  {%- capture companyLogo -%}{%- yield 'companyLogo' -%}{%- endcapture -%}
+  {%- capture companyName -%}{%- yield 'companyName' -%}{%- endcapture -%}
+
+
+  <div class="welcome-wrap">
+    <div class="welcome-logo-wrap">  
+      <img class="sign-in form-wrap logo welcome-logo" src="{{ logo }}" alt="{{ name }}" />       
+    </div>
+      <h1>{{ welcome_heading }}</h1>
+      <p>{{ welcome_subheading }}</p>
+  </div>
+
+  <div class="sign-in content-wrap">
+    <div class="sign-in form-wrap">
+      <div class="sign-in form-wrap logo-wrap">      
+        <img class="sign-in form-wrap logo"
+          src="{{ companyLogo }}"
+          alt="{{ companyName }} " />
+      </div>
+      {{ content_for_layout }}
+    </div>
+  </div>
+
+  <script>
+    $(document).foundation();
+
+    $(function(){
+        var $input = $('input');
+        var platform = getPlatform();
+
+        $input.on('focus', function(){ 
+            $(this).closest('label').addClass('active');
+            
+            // for android only
+          if (platform === 'android') { 
+            $('.sign-in-wrapper').addClass('marginBottom');
+          } 
+
+        }).on('blur', function(){
+            $(this).closest('label').removeClass('active');
+
+            // for android only
+            if (platform === 'android') { 
+              $('.sign-in-wrapper').removeClass('marginBottom');
+            } 
+        });
+
+       function getPlatform() {
+          if(navigator != undefined && navigator.userAgent != undefined) {
+              user_agent = navigator.userAgent.toLowerCase();
+              if(user_agent.indexOf('android') > -1) { // Is Android.
+                  return 'android';
+              }
+          }
+       }
+    });
+  </script>
+</body>
+</html>

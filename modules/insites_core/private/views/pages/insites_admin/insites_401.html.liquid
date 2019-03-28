@@ -1,0 +1,26 @@
+---
+slug: 401
+searchable: false
+metadata: {
+  insites: "true"
+}
+layout_name: "modules/insites_core/insites_admin/insites_empty"
+---
+
+{%- assign name = '401 - Unauthorised Access' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<div class="row">
+    <div class="error-wrap large-12 medium-12 small-12 cell text-center vertical-align-middle">
+        <img class="margin-bottom-medium" src="{{ 'modules/insites_core/insites_admin/images/error-401.svg' | asset_url }}" alt="401 Unauthorised" />
+        <h1>401 - Unauthorised</h1>
+        <p>You are not authorized to access this page. Contact the website administrator if you believe you should be able to view this directory or page. 
+        <br/>Please <a href="/admin/login"><u>login</u></a> with a different credential.</p>
+        <ins-button
+            class="margin-top-small"
+            label="GO BACK"
+            color="solid blue"
+            onclick=window.history.back();    
+        ></ins-button>
+    </div>
+</div>

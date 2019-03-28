@@ -1,0 +1,25 @@
+---
+slug: unauthorized
+layout_name: "insites_admin/insites_empty"
+searchable: false
+metadata: {
+  insites: "true"
+}
+layout_name: "insites_admin/insites_empty"
+---
+{%- assign name = '401 - Unauthorised Access' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<div class="row">
+    <div class="error-wrap large-12 medium-12 small-12 cell text-center vertical-align-middle">
+        <img class="margin-bottom-medium" src="{{ 'insites_admin/images/error-401.svg' | asset_url }}" alt="401 Unauthorised" />
+        <h1>401 - Unauthorised</h1>
+        <p>You don't have permission to access this page.</p>
+        <ins-button
+            class="margin-top-small"
+            label="GO BACK"
+            color="solid blue"
+            onclick=window.history.back();    
+        ></ins-button>
+    </div>
+</div>

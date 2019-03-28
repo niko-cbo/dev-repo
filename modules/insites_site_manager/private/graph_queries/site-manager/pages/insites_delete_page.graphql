@@ -1,0 +1,7 @@
+mutation insites_delete_page ($id: ID!) {
+	admin_page_delete (id: $id) {
+        id
+        slug
+        physical_file_path
+    }
+}

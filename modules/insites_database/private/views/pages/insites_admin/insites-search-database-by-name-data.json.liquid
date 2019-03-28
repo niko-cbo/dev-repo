@@ -1,0 +1,17 @@
+---
+slug: insites/api/search-database-by-name-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign page = context.params.page | minus: 0 | default: 1 -%}
+{%- assign size = context.params.size | minus: 0 | default: 10 -%}
+{%- assign keyword = context.params.keyword | downcase | default: null -%}
+
+{%- query_graph 'modules/insites_database/insites_search_database_by_name', result_name: 'database_list', keyword: keyword, page: page, size: size -%}
+{{ database_list | json }}

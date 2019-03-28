@@ -1,0 +1,24 @@
+mutation insites_create_page (
+  $slug: String!,
+  $path: String!,
+  $content: String!,
+  $metadata: HashObject,
+  $layout: String = ""
+) {
+  admin_page_create(
+    page: {
+      slug: $slug,
+      physical_file_path: $path,
+      content: $content,
+      metadata: $metadata,
+      layout_name: $layout,
+      searchable: true
+    }
+  ) {
+    id
+    slug
+    physical_file_path
+    metadata,
+    layout: layout_name
+  }   
+}

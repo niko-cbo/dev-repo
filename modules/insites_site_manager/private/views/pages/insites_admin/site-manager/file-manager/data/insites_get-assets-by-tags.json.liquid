@@ -1,0 +1,20 @@
+---
+slug: insites/api/get-assets-by-tags-data.json
+searchable: false
+method: get
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+ - modules/insites_core/insites_only_allowed_by_administrators
+---
+{% assign page = context.params.page | plus: 0 | default: 1 %}
+{% assign size = context.params.size | plus: 0 | default: 1000 %}
+{% assign searchTags = context.params.mytags | strip | default: null %}
+
+{% execute_query 'modules/insites_site_manager/insites_get_assets_by_tags', result_name: 'data', 
+    page: page, 
+    size: size,
+    tags: searchTags
+%}
+{{ data | json }}

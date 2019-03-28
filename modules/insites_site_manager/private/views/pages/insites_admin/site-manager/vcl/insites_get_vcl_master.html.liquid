@@ -1,0 +1,13 @@
+---
+slug: insites/api/get-vcl-master.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% execute_query 'modules/insites_site_manager/insites_get_vcl_master', result_name: 'vcl' %}
+{{ vcl | json }}

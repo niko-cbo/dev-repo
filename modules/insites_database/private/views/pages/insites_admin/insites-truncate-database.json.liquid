@@ -1,0 +1,19 @@
+---
+slug: insites/api/truncate-database.json
+method: post
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign name = context.params.name | downcase | default: null -%}
+{%- execute_query 'modules/insites_database/insites_truncate_database',
+    result_name: 'result',
+    name: name -%}
+
+{{ result | json }}

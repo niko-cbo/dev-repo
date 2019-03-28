@@ -1,0 +1,35 @@
+---
+slug: 403
+searchable: false
+metadata: {
+  insites: "true"
+}
+layout_name: "modules/insites_core/insites_admin/insites_empty"
+---
+
+{%- assign name = '403 - Forbidden Access' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<div class="row grid-x grid-padding-x grid-padding-y">
+    <div class="error-wrap large-12 medium-12 small-12 cell text-center vertical-align-middle">
+        <img class="margin-bottom-medium" src="{{ 'modules/insites_core/insites_admin/images/error-401.svg' | asset_url }}" alt="401 Unauthorised" />
+        <h1>403 - Forbidden</h1>
+        <p>You don't have permission to access this page.</p>
+        <div class="grid-x grid-padding-x grid-padding-y">
+            <div class="cell large-12 medium-12 small-12 text-center">
+                <ins-button
+                    class="margin-top-small"
+                    label="GO BACK"
+                    color="solid blue"            
+                    onclick=window.history.back(); 
+                ></ins-button>
+            <ins-button
+                class="margin-top-small"
+                label="login"
+                color="solid blue"            
+                onclick="window.location='/admin/login'";
+            ></ins-button>
+            </div>
+        </div>
+    </div>
+</div>

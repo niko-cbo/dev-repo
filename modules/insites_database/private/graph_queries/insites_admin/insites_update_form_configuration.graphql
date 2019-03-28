@@ -1,0 +1,35 @@
+mutation insites_update_form_configuration ($id: ID!, $schema: UpdateFormConfigurationInputType!) {
+  admin_form_configuration_update(
+    id:$id,
+    form_configuration:  $schema
+    	# { # start $schema
+			# 	name: "my_form",
+      #   physical_file_path: "modules/insites_database/public/form_configurations/my_form.liquid",
+      #   resource: "Customizations",
+      #   resource_owner: "anyone",
+      # 	authorization_policy_ids: [],
+      #     metadata: {
+      #         is_enabled: "false"
+      #     }
+      #   configuration: {
+      #     properties: {
+      #         field_1: {
+      #           validation: {
+      #             presence: true
+      #           }
+      #         },
+      #       	field_2: null,
+      #       	field_3: null
+      #     }
+      #   } # end configuration field
+      # } # end admin_create_form, end $schema
+) {
+  id
+  name
+  physical_file_path
+  resource
+  resource_owner
+  metadata
+  configuration  
+	}
+}

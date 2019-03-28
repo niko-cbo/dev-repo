@@ -1,0 +1,52 @@
+---
+slug: insites/api/get-vcl-users-profile.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign size = 10 %}
+{% assign page = 1 %}
+{% assign sortBy = "first_name" %}
+{% assign orderBy = "asc" %}
+{% assign keyword = "" %}
+{% assign is_enabled = "true" %}
+
+{% if params.size %}
+    {% assign size = params.size | plus: 0 %}
+{% endif %} 
+
+{% if params.page %}
+    {% assign page = params.page | plus: 0 %}
+{% endif %}
+
+{% if params.sortBy %}
+    {% assign sortBy = params.sortBy | downcase %}
+{% endif %}
+
+{% if params.orderBy %}
+    {% assign orderBy = params.orderBy | downcase %}
+{% endif %}
+
+{% if params.keyword %}
+    {% assign keyword = params.keyword | downcase %}
+{% endif %}
+
+{% if params.is_enabled %}
+    {% assign is_enabled = params.is_enabled | downcase %}
+{% endif %}
+ 
+{% execute_query 'modules/insites_site_manager/insites_get_vcl_users_profile', result_name: 'vcl', 
+  keyword: keyword,
+  size: size,
+  page: page,
+  sortBy: sortBy,
+  orderBy: orderBy,
+  is_enabled: is_enabled
+%}
+
+{{ vcl | json }}

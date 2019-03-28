@@ -1,0 +1,17 @@
+---
+name: insites_update_profile
+resource: User
+resource_owner: anyone
+fields:
+  id:
+  email:
+  first_name:
+  last_name:
+  profiles:
+    modules/insites_core/insites_administrator:
+        properties:
+            is_enabled:
+    modules/insites_core/insites_customer:
+        properties:
+            is_enabled:  
+--- 

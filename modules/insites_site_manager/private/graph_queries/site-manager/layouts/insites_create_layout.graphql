@@ -1,0 +1,19 @@
+mutation insites_create_layout (
+  $path: String!,
+  $physical: String!,
+  $body: String,
+  $format: PageFormat = html
+) {
+  admin_liquid_layout_create(
+    liquid_layout: {
+      path: $path,
+      body: $body,
+      format: $format,
+      physical_file_path: $physical
+    }
+  ) {    
+    id
+    path
+    physical_file_path
+  }   
+}

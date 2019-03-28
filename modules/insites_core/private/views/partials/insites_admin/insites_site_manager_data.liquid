@@ -1,0 +1,10 @@
+
+{%- comment -%} LIQUID IF instance is subscribed to Site Manager Module 
+{%- execute_query 'modules/insites_site_manager/insites_get_global_content', result_name: 'global' -%}
+{%- endcomment -%}
+{%- assign client_name = 'Client' -%}
+{%- assign client_logo = 'modules/insites_core/insites_admin/images/client-logo-icon.png' | asset_url  -%}
+{%- assign client_logo = global.items.results[0].company_icon.original | default: client_logo -%}
+{%- assign client_name = global.items.results[0].company_name | default: client_name -%}
+{%- content_for 'client_logo' -%}{{ client_logo }}{%- endcontent_for -%}
+{%- content_for 'client_name' -%}{{ client_name }}{%- endcontent_for -%}

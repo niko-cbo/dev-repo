@@ -1,0 +1,28 @@
+query insites_get_all_layouts_paginated (
+  $id: ID,
+  $page: Int = 1,
+  $size: Int = 20,
+  $path: StringFilter
+) {
+  admin_liquid_layouts (    
+    page: $page,
+    per_page: $size
+    filter: {
+      id: {
+        value: $id
+      },
+      path: $path
+    }
+  ){
+    current_page
+    total_pages
+    total_entries
+    results {
+      id
+      format
+      path
+      physical_file_path: physical_file_path
+      content: body
+    }
+  }
+}

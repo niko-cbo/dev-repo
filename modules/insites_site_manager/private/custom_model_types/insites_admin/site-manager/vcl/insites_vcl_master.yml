@@ -1,0 +1,10 @@
+name: insites_vcl_master
+custom_attributes:
+- name: instance_url
+  attribute_type: string
+- name: insites_key
+  attribute_type: string
+- name: last_update_by
+  attribute_type: string
+- name: is_enabled
+  attribute_type: boolean

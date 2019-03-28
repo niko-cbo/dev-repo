@@ -1,0 +1,25 @@
+---
+slug: insites/api/get-all-partials-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign size = context.params.size | plus: 0 | default: 1000 | plus: 0 %}
+{% assign page = context.params.page | plus: 0 | default: 1 | plus: 0 %}    
+{% assign path = context.params.path | downcase | default: null %}
+{% assign id = context.params.id | default: null %}
+{% if path %}
+  {% parse_json path %}
+  {
+    "contains": "{{ path }}"
+  }
+  {% endparse_json %}
+{% endif %}
+
+{% execute_query 'modules/insites_site_manager/insites_get_all_partials_paginated', result_name: 'partials_list', id: id, page: page, size: size, path: path %}
+{{ partials_list | json }} 

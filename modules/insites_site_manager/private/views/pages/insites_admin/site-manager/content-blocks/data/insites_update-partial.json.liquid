@@ -1,0 +1,16 @@
+---
+slug: insites/api/update-partial
+format: json
+method: post
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign data = context.params.payload | parse_json %}
+{%- execute_query 'modules/insites_site_manager/insites_update_partial', result_name: 'partial', 
+  id: data.id, 
+  partial_path: data.path, 
+  path: data.physical_file_path, 
+  body: data.content -%}
+{{ partial | json }}

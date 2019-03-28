@@ -1,0 +1,33 @@
+mutation insites_create_form_configuration ($schema: FormConfigurationInputType!) {
+  admin_form_configuration_create(
+    form_configuration: $schema
+    	# { # start $schema
+        #     name: "my_form",
+        #     physical_file_path: "modules/insites_database/public/form_configurations/my_form.liquid",
+        #     resource: "Customizations",
+        #     resource_owner: "anyone",
+        #     authorization_policy_ids: [],
+        #     metadata: {
+        #         is_enabled: "true"
+        #     }
+        #     configuration: {
+        #     properties: {
+        #         field_1: {
+        #             validation: {
+        #               presence: true
+        #             }
+        #         },
+        #             field_2: null,
+        #             field_3: null
+        #     }
+        #     } # end configuration field
+        # } # end $schema
+) {
+    name
+    physical_file_path
+    resource
+    resource_owner
+    metadata
+    configuration  
+    }  
+}

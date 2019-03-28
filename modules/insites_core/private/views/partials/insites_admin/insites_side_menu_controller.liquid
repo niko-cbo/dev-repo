@@ -1,0 +1,24 @@
+{%- comment -%} LIQUID Check which modules are 'installed' & append menu item {%- endcomment -%}
+
+{%- include 'modules/insites_site_manager/insites_menu/insites_site_manager_side_menu' -%}
+{%- include 'modules/insites_database/insites_menu/insites_database_side_menu' -%}
+
+<ins-sidebar-item
+    footer-link="settingsMenu"
+    icon="icon-settings-1"
+    label="Settings"
+    with-submenu>
+      
+    <ins-sidebar-item
+        link="#/system-fields"
+        label="System Fields">
+    </ins-sidebar-item>
+
+    <ins-sidebar-item
+        link="#/api-keys"
+        label="API Keys">
+    </ins-sidebar-item>  
+    
+    {%- include 'modules/insites_settings_and_branding/insites_menu/insites_settings_branding_side_menu' -%}
+    {%- include 'modules/insites_core/insites_menu/insites_index_settings_menu' -%}
+</ins-sidebar-item>   

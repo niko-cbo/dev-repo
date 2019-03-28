@@ -1,0 +1,11 @@
+mutation insites_create_database_item ($data: CustomizationInputType!) {
+  	customization_create(
+      customization: $data			
+    ) {
+    created_at
+    name
+    id
+    properties
+  }  
+}	
+

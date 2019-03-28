@@ -1,0 +1,35 @@
+query insites_get_form_configurations_list ($id: ID, $name: String, $page: Int = 1, $size: Int = 10) {  
+  items: admin_form_configurations(
+    page: $page,
+    per_page: $size
+    filter: {
+    	id: { value: $id },
+      name: { exact: $name, not_starts_with: "modules/insites_" }
+    }
+    sort: [{
+      name:{ order: DESC }
+    }]
+  ) {
+    total_entries
+    current_page
+    per_page
+    has_next_page
+    has_previous_page
+    total_pages
+    results {
+      id
+      name
+      physical_file_path
+      liquid_body
+      metadata
+      resource
+      resource_owner
+      authorization_policies {
+        id
+        name
+        physical_file_path
+      }
+      configuration
+    }
+  }
+}

@@ -1,0 +1,20 @@
+name: insites_contact_number
+properties:
+- name: home_phone_country_code
+  type: string
+- name: home_phone_area_code
+  type: string
+- name: home_phone_number
+  type: string
+- name: mobile_phone_country_code
+  type: string
+- name: mobile_phone_area_code
+  type: string
+- name: mobile_phone_number
+  type: string 
+- name: work_phone_country_code
+  type: string
+- name: work_phone_area_code
+  type: string
+- name: work_phone_number
+  type: string

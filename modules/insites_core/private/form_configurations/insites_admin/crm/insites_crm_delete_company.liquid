@@ -1,0 +1,11 @@
+---
+name: insites_crm_delete_company
+resource: Customization
+resource_owner: anyone
+fields:
+    properties:
+        is_enabled:
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---

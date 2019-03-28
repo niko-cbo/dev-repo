@@ -1,0 +1,22 @@
+mutation insites_create_vcl_master(
+  $instance_url: String!,
+  $insites_key: String!,
+  $last_update_by: String!
+  $is_enabled: String!
+) {
+  customization_create(
+    form_configuration_name: "modules/insites_site_manager/insites_create_vcl_master"
+    customization: {
+      custom_model_type_name: "modules/insites_site_manager/insites_vcl_master",
+      properties: [
+        { name: "instance_url", value: $instance_url },
+        { name: "insites_key", value: $insites_key },
+        { name: "last_update_by", value: $last_update_by },
+        { name: "is_enabled", value: $is_enabled }
+      ]
+    }
+  ){
+    id
+    properties
+  }
+}

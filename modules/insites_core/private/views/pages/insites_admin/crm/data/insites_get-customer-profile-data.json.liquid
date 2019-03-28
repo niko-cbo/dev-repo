@@ -1,0 +1,20 @@
+---
+slug: insites/api/get-customer-profile-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+{% if params.email %}
+{% execute_query "modules/insites_core/insites_get_customer_profile_by_email" , email: {{params.email}}, result_name: "profile" %}
+    {% if profile.items.results.size <= 0 %}
+        Error: Email provided is invalid or does not exist.
+    {% else %}
+        {{profile | json}}
+    {% endif %}
+{% else %}
+    Error: Please provide 'email' parameter.
+{% endif %}

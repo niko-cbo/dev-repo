@@ -1,0 +1,14 @@
+query insites_get_vcl_master {
+  items: customizations(
+    name: "modules/insites_site_manager/insites_vcl_master"
+    page: 1,
+    per_page: 1
+) {
+    total_entries
+    results {
+      id
+      updated_at
+      properties
+    }
+  }
+}

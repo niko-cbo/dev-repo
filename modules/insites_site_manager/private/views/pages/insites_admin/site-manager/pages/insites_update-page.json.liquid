@@ -1,0 +1,25 @@
+---
+slug: insites/api/update-page
+format: json
+method: post
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign data = context.params.payload | parse_json %}
+{% execute_query 'modules/insites_site_manager/insites_update_page', result_name: 'page',
+  id: data.id,
+  slug: data.slug,
+  content: data.content,
+  metadata: data.metadata,
+  layout: data.layout,
+  path: data.physical_file_path,
+  redirect_to: data.redirect_to
+%}
+
+{{ page | json }}

@@ -1,0 +1,34 @@
+---
+slug: insites/api/get-database-items-list.json
+method: get
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | downcase | default: null -%}
+{%- assign name = context.params.name | default: null -%}
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign size = context.params.size | plus: 0 | default: 10 -%}
+{%- assign field = context.params.field | downcase | default: null -%}
+{%- assign keyword = context.params.keyword | downcase | default: null -%}
+{%- assign sort = context.params.sort | downcase | default: "updated_at" -%}
+{%- assign order = context.params.order | downcase | default: "desc" -%}
+
+{%- query_graph 'modules/insites_database/insites_get_database_items_list',
+    result_name: 'result',
+    id: id,
+    name: name,
+    page: page,
+    size: size,
+    field: field,
+    keyword: keyword,
+    sort: sort,
+    order: order -%}
+
+{{ result | json }}

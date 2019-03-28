@@ -1,0 +1,8 @@
+mutation insites_delete_database ($id: ID!) {
+  admin_model_schema_delete (
+    id: $id
+  ) {
+    id
+    name
+  }  
+}

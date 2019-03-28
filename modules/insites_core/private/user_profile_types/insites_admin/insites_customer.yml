@@ -1,0 +1,30 @@
+name: insites_customer
+properties:
+- name: company_id
+  type: string
+- name: contact_type
+  type: string
+- name: notes
+  type: string
+- name: profile_image
+  type: photo
+  metadata:
+    Content-Disposition: inline
+- name: home_address
+  type: address  
+- name: work_address
+  type: address
+- name: shipping_address_1
+  type: address  
+- name: shipping_address_2
+  type: address  
+- name: shipping_address_3
+  type: address  
+- name: billing_address
+  type: address  
+- name: po_address
+  type: address  
+- name: attachments
+  type: file
+- name: is_enabled
+  type: boolean

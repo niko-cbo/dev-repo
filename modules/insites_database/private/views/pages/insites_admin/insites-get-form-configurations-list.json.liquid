@@ -1,0 +1,26 @@
+---
+slug: insites/api/get-form-configurations-list.json
+method: get
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | downcase | default: null -%}
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign size = context.params.size | plus: 0 | default: 10 -%}
+{%- assign name = context.params.name | default: null -%}
+
+{%- query_graph 'modules/insites_database/insites_get_form_configurations_list',
+    result_name: 'result',
+    name: name,
+    id: id,
+    size: size,
+    page: page -%}
+
+{{ result | json }}

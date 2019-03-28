@@ -1,0 +1,24 @@
+query insites_get_database_field_groups($page: Int = 1, $size: Int = 10) {
+  items: customizations(
+    page: $page,
+    per_page: $size,    
+    is_deleted: false,    
+    name: "modules/insites_database/insites_field_groups",
+    sort: [{name: "updated_at", order: "asc"}]
+    properties: [{name: "is_enabled", value:"true"}]
+  ) {
+    total_entries
+    current_page
+    per_page
+    has_next_page
+    has_previous_page
+    total_pages
+    results { 
+      id
+      name
+      field_label: property(name:"field_label")
+      is_enabled: property(name:"is_enabled")
+      properties
+    }
+  }
+}

@@ -1,0 +1,24 @@
+---
+slug: insites/api/get-all-company-list-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+{% assign size = 1000 %}
+{% assign page = 1 %}
+{% assign sortBy = "updated_at" %}
+{% assign orderBy = "asc" %} 
+
+{% if params.sortBy %}
+    {% assign sortBy = params.sortBy | downcase %}
+{% endif %}
+{% if params.orderBy %}
+    {% assign orderBy = params.orderBy | downcase %}
+{% endif %}
+ 
+{% query_graph 'modules/insites_core/insites_get_all_companies', result_name: 'company_list', size: size, page: page, sortBy: sortBy, orderBy: orderBy %}
+{{ company_list | json }}

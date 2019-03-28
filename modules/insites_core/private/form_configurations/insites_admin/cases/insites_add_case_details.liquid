@@ -1,0 +1,13 @@
+---
+name: insites_add_case_details
+resource: Customization
+resource_owner: anyone
+fields:
+    properties:
+        case_id:
+        assigned_to:
+        status:
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---

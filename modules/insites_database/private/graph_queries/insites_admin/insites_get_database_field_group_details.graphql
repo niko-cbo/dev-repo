@@ -1,0 +1,18 @@
+query insites_get_database_field_group_details($id:ID!) {
+   items: customizations(
+    id: $id,
+    is_deleted: false,    
+    properties: [{name: "is_enabled", value:"true"}]
+  ) {
+    total_entries
+    results { 
+      id
+      created_at
+      updated_at
+      user_id
+      field_label: property(name:"field_label")
+      is_enabled: property(name:"is_enabled")
+      properties
+    }
+  }
+}

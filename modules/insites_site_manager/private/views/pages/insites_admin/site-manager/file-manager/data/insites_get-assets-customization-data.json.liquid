@@ -1,0 +1,19 @@
+---
+slug: insites/api/get-assets-customization-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+ - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign page = context.params.page | plus: 0 | default: 1 %}
+{% assign size = context.params.size | plus: 0 | default: 1000 %}
+{% if context.params.filter_by and context.params.keyword %}
+    {% assign filter_by = 'properties.' | append: context.params.filter_by | append: '.raw' | default: null %}
+    {% assign keyword = context.params.keyword | replace: "/", "\\/" | replace: " ", "\\ " | replace: "(", "\\(" | replace: ")", "\\)" | replace: "[", "\\[" | replace: "]", "\\]" | default: null %}
+{% endif %}
+
+{% execute_query 'modules/insites_site_manager/insites_get_assets_customization', result_name: 'data', page: page, size: size, filter_by: filter_by, keyword: keyword %}
+{{ data | json }}

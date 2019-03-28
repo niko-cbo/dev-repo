@@ -1,0 +1,44 @@
+---
+slug: insites/api/get-all-redactor-images.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+---
+{%- capture asset_data -%}  
+    {{ asset_url | json }}
+{%- endcapture -%}
+{%- assign asset_data = asset_data | remove: "{" | remove: "}" -%}
+{%- assign file_array = asset_data | split: "," | uniq -%} 
+
+{%- assign accepted_file_types = "png, jpg, jpeg, gif, svg, tiff, bmp" | split: "," | strip -%}
+{%- capture redactor_data -%}
+[
+{%- for i in file_array -%} 
+    {%- assign file_path = i | split: ":" | first | remove: '"'-%}
+    {%- assign file_url = i | split: ":" | last | remove: '"'-%}    
+    {%- assign file_name = i | split: "/" | last  | split: "?updated" | first -%}
+    {%- assign file_type = file_name | split: "." | last | downcase -%}
+   
+    {%- if accepted_file_types contains file_type -%}  
+      {%- assign keyword = file_path | replace: "/", "\\/" | replace: "--", "\\--" | default: null -%}
+      {%- execute_query 'modules/insites_site_manager/insites_get_deleted_assets_data', 
+        result_name: 'deleted_assets', 
+        filter_by: 'properties.physical_path'
+        keyword: keyword  -%}   
+        {%- if deleted_assets.items.total_entries <= 0 -%}
+        {%- assign url = "{{ '" | append: file_path | append: "' | asset_url }}" -%}  
+        {%- capture image_object_data -%} {
+            "thumb": "{{ file_url | default: "" }}",
+            "url": "{{ url | default: "" }}",
+            "id": "ins-image-{{ forloop.index }}",
+            "title": "{{ file_name }}",
+            "path": "{{ file_path | default: "" }}",
+            "type":  "{{ file_type | default: "" }}"
+        },{%- endcapture -%}
+        {{ image_object_data }}
+        {%- endif -%}
+        {%- endif -%}
+{%- endfor -%}]|
+{%- endcapture -%}
+{{ redactor_data | strip_newlines | replace:",]|", "]" }} 

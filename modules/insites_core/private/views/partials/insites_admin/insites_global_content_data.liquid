@@ -1,0 +1,8 @@
+{%- comment -%} LIQUID IF instance is subscribed to Site Manager Module 
+{%- execute_query 'modules/insites_site_manager/insites_get_global_content', result_name: 'global' -%}
+{%- endcomment -%}
+{%- assign default_logo = 'modules/insites_core/insites_admin/images/client-logo.png' | asset_url -%}
+{%- assign companyLogo = global.items.results[0].company_logo.original | default: default_logo-%}
+{%- assign companyName = global.items.results[0].company_name | default: 'Company Name' -%}
+{%- content_for 'companyLogo' -%}{{ companyLogo }}{%- endcontent_for -%}
+{%- content_for 'companyName' -%}{{ companyName }}{%- endcontent_for -%}

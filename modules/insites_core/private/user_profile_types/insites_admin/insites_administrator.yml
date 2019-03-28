@@ -1,0 +1,6 @@
+name: insites_administrator
+properties:
+- name: company
+  type: string
+- name: is_enabled
+  type: boolean

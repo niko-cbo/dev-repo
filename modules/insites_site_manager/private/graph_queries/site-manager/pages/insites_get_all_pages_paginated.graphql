@@ -1,0 +1,47 @@
+query insites_get_all_pages_paginated (
+  $id: ID,
+  $page: Int = 1,
+  $size: Int = 10,
+  $status: Any!,
+  $keyword: String = ""
+) {
+  admin_pages (
+    page: $page,
+    per_page: $size,
+    filter: {
+      id: {
+        value: $id
+      }
+      content: {
+        contains: $keyword
+      }
+      metadata: {
+        attribute: {
+          key: "status",
+          value: $status
+        }
+      },
+    }
+  ) {
+    current_page
+    per_page
+    total_pages
+    total_entries
+    results {
+      id
+      slug
+      metadata
+      physical_file_path
+      layout: layout_name
+      content
+      format
+      redirect_code
+      redirect_to
+      searchable
+      authorization_policies {
+        id
+        name
+      }
+    }
+  }
+}

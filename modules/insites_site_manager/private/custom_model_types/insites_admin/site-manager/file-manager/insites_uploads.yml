@@ -1,0 +1,4 @@
+name: insites_uploads
+custom_attributes:
+- name: file_upload
+  attribute_type: file

@@ -1,0 +1,156 @@
+---
+slug: insites/api/get-assets-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+ - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{ 
+    "items" : {
+        "results" : {
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign size = context.params.size | plus: 0 | default: 1000 -%}
+{%- assign keyword = context.params.keyword | default: null -%}
+
+{%- execute_query 'modules/insites_site_manager/insites_get_assets_by_folder', result_name: 'folder_data', page: page, size: size, keyword: keyword -%}
+{%- if folder_data.items.total_pages > 0 -%}
+        {%- capture folder_data -%}
+            {%- if folder_data.items.total_pages > 0 -%}
+            
+            {%- assign totalPages = folder_data.items.total_pages -%}
+
+              {%- for i in (1..totalPages) -%}
+                  {% assign totalPages = totalPages | minus: 1 -%}
+                  {%- execute_query 'modules/insites_site_manager/insites_get_assets_by_folder', result_name: 'data', page: i, size: size, keyword: keyword -%}
+
+                          {%- assign folder_data = data | to_hash -%}
+                          {%- assign final_folders = "" -%}
+                          {%- for key in folder_data.items.results -%} 
+
+                          {% if key.physical_path contains '.' %}
+                            {%- assign folders = key.physical_path | split: '.' | first | default: "" -%}
+                            {%- assign folders = folders | split: '/' -%}
+                            {%- assign folder = "" -%}
+
+                              {%- for i in folders -%}
+                                  {% if forloop.last != true %}
+                                  {%- assign folder = folder | append: i | append: "/" -%}
+                                  {% endif %}
+                              {%- endfor -%}
+                          {% else %}
+                            {%- assign folders = key.physical_path -%}
+                            {%- assign start = folders | size | minus: 1 -%}
+                            {%- assign end = folders | size -%}
+                            {%- assign check_folders = folders | slice: start, end -%}
+
+                            {%- if check_folders == "/" -%}
+                                {% assign folders = folders | append: "'" -%}
+                            {%- endif -%}
+                            {%- assign folders = folders | split: '/' -%}
+
+                            {%- assign folder = "" -%}
+
+                              {%- for i in folders -%}
+                                    {%- assign folder = folder | append: i | append: "/" -%}
+
+                                    {%- if i != "'" -%}    
+                                        {%- if final_folders == "" -%}
+                                            {%- assign final_folders = folder -%}
+                                        {%- else -%}
+                                            {%- assign final_folders = final_folders | append: "," | append: folder -%}
+                                        {%- endif -%}
+                                    {%- endif -%}
+
+                                    {%- assign extension = folders | split: '.' | last -%}
+                                    {%- assign final_folders = final_folders | split: "," | uniq | split: "," -%}
+                                        
+                                    {%- if i != "'" -%} 
+                                        {%- capture raw_folder -%}{{folder}}{%- endcapture -%}
+                                        {%- assign raw_folder =  raw_folder | replace: "/&amp;#39;/", "/" -%}
+                                        {{ raw_folder }},
+                                    {%- else -%}
+                                        {%- for i in final_folders -%}
+                                            {%- assign validFolder = i | remove: "[" | remove: "]" | strip -%}
+                                            {%- if validFolder != '' and validFolder != '""' -%}
+                                                {{ validFolder }},
+                                            {%- endif -%}  
+                                        {%- endfor -%}
+                                    {%- endif -%}
+                              {%- endfor -%}
+                          {% endif %}
+                             
+                          {%- endfor -%}
+                          
+              {%- endfor -%}
+            {%- else -%}
+                      {%- assign folder_data = folder_data | to_hash -%}
+                      {%- assign final_folders = "" -%}
+                      {%- for key in folder_data.items.results -%} 
+                          {%- assign folders = key.physical_path | split: '.' | first -%}
+                            {%- assign start = folders | size | minus: 1 -%}
+                            {%- assign end = folders | size -%}
+                            {%- assign check_folders = folders | slice: start, end -%}
+
+                            {%- if check_folders == "/" -%}
+                                {% assign folders = folders | append: "'" -%}
+                            {%- endif -%}
+                          {%- assign folders = folders | split: '/' -%}
+                          
+                          {%- assign folder = "" -%}
+
+                          {%- for i in folders -%}
+                          {%- if forloop.last != true -%}
+                              {%- assign folder = folder | append: i | append: "/" -%}
+                          {%- endif -%}      
+                          {%- endfor -%}
+
+                            {%- if i != "'" -%}    
+                                {%- if final_folders == "" -%}
+                                    {%- assign final_folders = folder -%}
+                                {%- else -%}
+                                    {%- assign final_folders = final_folders | append: "," | append: folder -%}
+                                {%- endif -%}
+                            {%- endif -%}
+
+                          {%- assign extension = folders | split: '.' | last -%}
+
+                      {%- endfor -%}
+                      {%- assign final_folders = final_folders | split: "," | uniq | split: "," -%}
+                      
+                        {%- if i != "'" -%} 
+                            {%- capture raw_folder -%}{{folder}}{%- endcapture -%}
+                            {%- assign raw_folder =  raw_folder | replace: "/&amp;#39;/", "/" -%}
+                            {{ raw_folder }},
+                        {%- else -%}
+                            {%- for i in final_folders -%}
+                                {%- assign validFolder = i | remove: "[" | remove: "]" | strip -%}
+                                {%- if validFolder != '' and validFolder != '""' -%}
+                                        {{ validFolder }},
+                                {%- endif -%}  
+                            {%- endfor -%}
+                        {%- endif -%}  
+
+            {%- endif -%}
+        {%- endcapture -%}
+
+        {%- assign folder_data = folder_data | strip_newlines | strip -%}
+        {%- assign folder_data = folder_data | split: "," | uniq | split: "," -%}
+            {%- for i in folder_data -%}
+                {%- assign validFolder = i | remove: "[" | remove: "]" | remove: '\"' | strip -%}
+                {%- if validFolder != '' and validFolder != '""' -%}
+                    {{ validFolder }} : "",
+                {%- endif -%}  
+            {%- endfor -%}
+{%- endif -%}
+
+    {%- capture asset_data -%}  
+        {{ asset_url | json }}
+    {%- endcapture -%}
+    {%- assign asset_data = asset_data | remove: "{" | remove: "}" -%}
+    {{ asset_data }}
+        }
+    }
+ }

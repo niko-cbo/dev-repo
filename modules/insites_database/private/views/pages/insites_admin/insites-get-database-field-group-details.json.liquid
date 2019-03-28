@@ -1,0 +1,23 @@
+---
+slug: insites/api/get-database-field-group-details.json
+method: get
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | plus: 0 | default: null -%}
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign size = context.params.size | plus: 0 | default: 10 -%}
+{%- query_graph 'modules/insites_database/insites_get_database_field_group_details',
+    result_name: 'result',
+    id: id,
+    size: size,
+    page: page -%}
+
+{{ result | json }}

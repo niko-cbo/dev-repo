@@ -1,0 +1,19 @@
+mutation insites_delete_partial ($id: ID!) {
+  admin_liquid_partial_delete(
+    id: $id
+  ) {    
+    id
+    path
+    physical_file_path
+  }   
+}
+
+# mutation insites_create_partial {
+#   admin_liquid_partial_delete(
+#			id:1234
+#   ) {    
+#     id
+#     path
+#     physical_file_path
+#   }   
+# }

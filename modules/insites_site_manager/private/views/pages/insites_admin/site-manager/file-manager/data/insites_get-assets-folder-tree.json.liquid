@@ -1,0 +1,36 @@
+---
+slug: insites/api/get-assets-folder-tree.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+ - modules/insites_core/insites_only_allowed_by_administrators
+---
+{%- assign page = context.params.page | plus: 0 | default: 1 -%}
+{%- assign size = context.params.size | plus: 0 | default: 1000 -%}
+{%- assign keyword = context.params.keyword | default: null -%}
+{%- execute_query 'modules/insites_site_manager/insites_get_assets_by_folder', result_name: 'data', page: page, size: size, keyword: keyword -%}
+{%- capture data -%}
+{{ data | json }}
+{%- endcapture -%}
+{%- assign data = data | to_hash -%}
+{%- capture tree_data -%}
+{
+    "items": {
+        "total_entries" : {{ data.items.total_entries }},
+        "total_pages": {{ data.items.total_pages }},
+        "current_page": {{ data.items.current_page }},
+        "per_page": {{ data.items.per_page }},
+        "page": {{ data.items.page }},
+        "results": {
+            
+        {%- for key in data.items.results -%} 
+        "{{ key.physical_path }}" : "{{ key.direct_link }}"{% if forloop.last == false -%},{%- endif -%}
+            
+        {%- endfor -%}
+        }
+    }
+}
+{%- endcapture -%}
+{{ tree_data }}

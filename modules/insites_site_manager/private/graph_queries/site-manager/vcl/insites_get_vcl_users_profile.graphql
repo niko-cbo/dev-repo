@@ -1,0 +1,54 @@
+query insites_get_vcl_users_profile (
+  $page: Int, 
+  $size: Int,
+  $sortBy: String,
+  $orderBy: String,
+  $keyword: String!
+  $is_enabled: String
+) {
+  items: people (
+    per_page: $size
+    page: $page
+    sort: [
+      { name: $sortBy, order: $orderBy }
+    ]
+    query: { 
+      keyword: $keyword, 
+      match_type: CONTAINS, 
+      fields: [
+        { name: "name" },
+        { name: "first_name" },
+        { name: "last_name" },
+        { name: "email" }
+      ]
+    }
+    user: {
+      is_deleted: false
+    	profiles: [ 
+        {
+          profile_type: "modules/insites_site_manager/insites_vcl_user_profile"
+          properties: [
+            { name: "is_enabled", value: $is_enabled },
+            { name: "insites_key", value: "deleted" exclude: true }
+          ]
+        }                    
+      ]
+    }
+  ){
+    total_entries
+    results {
+      id
+      slug
+      email
+      first_name
+      last_name
+      created_at
+      updated_at
+      insites_vcl_user_profile:profile (
+        profile_type: "modules/insites_site_manager/insites_vcl_user_profile"
+      ){
+        properties
+      }
+    }
+  }
+}

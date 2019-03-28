@@ -1,0 +1,6 @@
+name: insites_field_groups
+properties:
+  - name: field_label
+    type: string
+  - name: is_enabled
+    type: boolean

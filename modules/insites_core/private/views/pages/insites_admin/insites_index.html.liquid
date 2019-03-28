@@ -1,0 +1,77 @@
+---
+slug: admin/insites
+format: html
+layout_name: modules/insites_core/insites_admin/insites_shell
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign name = 'Insites Admin' -%}
+
+{%- include 'modules/insites_core/insites_admin/insites_settings_branding_data' -%}
+{%- capture logo -%}{%- yield 'logo' -%}{%- endcapture -%}
+{%- capture icon -%}{%- yield 'icon' -%}{%- endcapture -%}
+{%- capture enable_support -%}{%- yield 'enable_support' -%}{%- endcapture -%}
+{%- capture support_url -%}{%- yield 'support_url' -%}{%- endcapture -%}
+
+{%- include 'modules/insites_core/insites_admin/insites_site_manager_data' -%}
+{%- capture client_name -%}{%- yield 'client_name' -%}{%- endcapture -%}
+{%- capture client_logo -%}{%- yield 'client_logo' -%}{%- endcapture -%}
+
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<ins-admin>
+  <ins-sidebar
+    with-sidebar-actions
+    full-logo="{{ logo }}"
+    icon-logo="{{ icon }}">
+
+    {%- include 'modules/insites_core/insites_menu/insites_index_menu' -%}    
+    {%- include 'modules/insites_core/insites_admin/insites_side_menu_controller' -%}
+
+    <ins-sidebar-footer class="side-bar-footer">
+
+      <ins-sidebar-footer-button 
+        icon="icon-settings-1"
+        open="settingsMenu">
+      </ins-sidebar-footer-button>
+      {%- include 'modules/insites_core/insites_menu/insites_settings_branding_lock_menu' -%}
+   
+      <ins-sidebar-footer-button
+        onclick="logoutUser()"
+        icon="icon-logout-1">
+      </ins-sidebar-footer-button>
+    </ins-sidebar-footer>
+</ins-sidebar>
+
+<ins-content>
+    {%- query_graph 'modules/insites_core/current_user', result_name: 'g' -%}
+  <div class="hide-render">
+    {%- include_form 'modules/insites_core/insites_admin_create_profile' -%}
+  </div>
+  
+  <ins-header support-link="{{ support_url }}">    
+    <ins-header-user
+      name="{{g.current_user.name}}"
+      logout-link="/admin/sessions/logout"
+      profile-link="#/my-profile">
+    </ins-header-user>
+
+
+    <ins-instances
+      logo-link="{{client_logo}}"
+      instance="{{client_name}}">
+    </ins-instances>
+  </ins-header>
+    
+  {%- include 'modules/insites_core/insites_admin/insites_index_module_dependencies' -%}
+</ins-content>
+</ins-admin>
+{%- include 'modules/insites_core/insites_admin/insites_lock_screen_controller' -%}
+
+<script src="{{ 'modules/insites_core/insites_admin/scripts/admin-scripts/adminScripts.min.js' | asset_url }}"></script>

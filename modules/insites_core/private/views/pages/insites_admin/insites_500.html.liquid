@@ -1,0 +1,28 @@
+---
+slug: 500
+searchable: false
+metadata: {
+  insites: "true"
+}
+layout_name: "modules/insites_core/insites_admin/insites_empty" 
+---
+{%- assign name = '500 - Server Error' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+<div class="row">
+    <div class="error-wrap large-12 medium-12 small-12 cell text-center vertical-align-middle">
+        <img class="margin-bottom-medium" src="{{ 'modules/insites_core/insites_admin/images/error-500.svg' | asset_url }}" alt="500 Server Error" />
+        <h1>500 - Server Error</h1>
+        <p>The server encountered an error or misconfiguration and was unable to complete your request.</p>
+        <ins-button
+            class="margin-top-small"
+            label="GO BACK"
+            color="solid blue"
+            onclick=window.history.back();   
+        ></ins-button>
+    </div>
+</div>
+
+
+<script>
+</script>

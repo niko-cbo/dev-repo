@@ -1,0 +1,16 @@
+mutation insites_update_database ($id:ID!, $schema: UpdateModelSchemaInputType!) {
+  admin_model_schema_update (
+    id: $id,
+    model_schema: $schema
+  ) {
+    id
+    name
+    metadata
+    fields: properties {
+      id
+      name
+      attribute_type
+      metadata
+    }
+  }  
+}

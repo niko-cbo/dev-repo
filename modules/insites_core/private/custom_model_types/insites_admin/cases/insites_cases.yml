@@ -1,0 +1,8 @@
+name: insites_cases
+properties:
+- name: case_id
+  type: string
+- name: assigned_to
+  type: string
+- name: status
+  type: string

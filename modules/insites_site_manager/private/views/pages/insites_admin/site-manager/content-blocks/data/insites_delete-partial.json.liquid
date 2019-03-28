@@ -1,0 +1,15 @@
+---
+slug: insites/api/delete-partial.json
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | plus: 0 | default: "" -%}
+{%- execute_query 'modules/insites_site_manager/insites_delete_partial', result_name: 'partial', id: id -%}
+{{ partial | json }}

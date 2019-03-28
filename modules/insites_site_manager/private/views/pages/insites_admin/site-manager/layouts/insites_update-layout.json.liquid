@@ -1,0 +1,21 @@
+---
+slug: insites/api/update-layout
+format: json
+method: post
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign data = context.params.payload | parse_json %}
+{% execute_query 'modules/insites_site_manager/insites_update_layout', result_name: 'layout', 
+    id: data.id, 
+    layout_path: data.path, 
+    path: data.physical_path, 
+    body: data.content, 
+    format: data.format %}
+{{ layout | json }}

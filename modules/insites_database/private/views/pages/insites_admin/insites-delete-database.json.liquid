@@ -1,0 +1,19 @@
+---
+slug: insites/api/delete-database.json
+method: post
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign id = context.params.id | downcase | default: null -%}
+{%- execute_query 'modules/insites_database/insites_delete_database',
+    result_name: 'result',
+    id: id,-%}
+
+{{ result | json }}

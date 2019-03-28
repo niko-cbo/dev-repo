@@ -1,0 +1,15 @@
+---
+name: insites_delete_admin_user
+resource: User
+resource_owner: anyone
+fields:
+  profiles:
+    modules/insites_core/insites_administrator:
+      properties:
+        is_enabled:
+          property_options:
+                default: false
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---

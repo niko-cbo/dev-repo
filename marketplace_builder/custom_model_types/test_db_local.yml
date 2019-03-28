@@ -1,0 +1,6 @@
+name: test_db_local
+properties:
+- name: field_1_local
+  type: string
+- name: field_2_local
+  type: array

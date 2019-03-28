@@ -1,0 +1,27 @@
+---
+slug: insites/api/get-all-company-contact-list-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign sortBy = "updated_at" %}
+{% assign orderBy = "asc" %}
+{% assign id = "" %}
+
+{% if params.id %}
+    {% assign id = params.id | downcase %}
+{% endif %} 
+{% if params.sortBy %}
+    {% assign sortBy = params.sortBy | downcase %}
+{% endif %}
+{% if params.orderBy %}
+    {% assign orderBy = params.orderBy | downcase %}
+{% endif %}
+
+{% query_graph 'modules/insites_core/insites_get_all_company_contact_list', result_name: 'contact_list', id: id, sortBy: sortBy, orderBy: orderBy %}
+{{ contact_list | json }}

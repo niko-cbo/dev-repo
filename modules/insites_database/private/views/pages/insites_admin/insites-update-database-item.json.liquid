@@ -1,0 +1,20 @@
+---
+slug: insites/api/update-database-item.json
+method: put
+format: json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{%- assign data = context.params.payload | parse_json | default: null -%}
+{%- execute_query 'modules/insites_database/insites_update_database_item',
+    result_name: 'result',
+    id: data.id
+    data: data.customization -%}
+
+{{ result | json }}

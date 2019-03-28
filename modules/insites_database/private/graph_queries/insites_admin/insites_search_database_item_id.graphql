@@ -1,0 +1,25 @@
+query insites_search_database_item_id ($name: String, $page: Int = 1, $size: Int = 10, $keyword: ID) {
+  items: customizations(
+    id: $keyword
+    page: $page,
+    per_page: $size,
+    # id: $database_id,
+    name: $name,
+    sort: [{name: "updated_at", order: "asc"}]    
+  ) {
+    total_entries
+    current_page
+    per_page
+    has_next_page
+    has_previous_page
+    total_pages
+    results { 
+      id
+      name
+      human_name
+      created_at
+      updated_at
+      properties
+    }
+  }
+}

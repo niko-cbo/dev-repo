@@ -1,0 +1,11 @@
+---
+slug: insites/api/s3-company-form.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+{% include_form 'modules/insites_core/insites_add_new_company', parent_resource_id: 'modules/insites_core/insites_company' %}

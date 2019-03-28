@@ -1,0 +1,41 @@
+mutation insites_mutate_vcl_user_profile (
+    $userid: ID!,
+    $instance_url: String!,
+    $insites_key: String!,
+    $last_update_by: String!,
+    $is_enabled: String
+){
+    user_update (
+        id: $userid,
+        form_configuration_name: "modules/insites_site_manager/insites_mutate_vcl_user_profile",
+        user: {
+            profiles: [
+                {
+                    name: "modules/insites_site_manager/insites_vcl_user_profile",
+                    values: {
+                        properties: [
+                            { name: "instance_url", value: $instance_url },
+                            { name: "insites_key", value: $insites_key },
+                            { name: "last_update_by", value: $last_update_by },
+                            { name: "is_enabled", value: $is_enabled }
+                        ]
+                    }
+                }
+            ]
+        }
+    ){
+        id
+        first_name
+        last_name
+        email
+        insites_vcl_user_profile: profile (
+            profile_type: "modules/insites_site_manager/insites_vcl_user_profile"
+        ){
+            id
+            instance_url: property(name: "instance_url")
+            insites_key: property(name: "insites_key")
+            last_update_by: property(name: "last_update_by")
+            is_enabled: property(name: "is_enabled")
+        }
+    }
+}

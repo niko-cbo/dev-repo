@@ -1,0 +1,257 @@
+{% log "Starting migration of Dummy Data..." %}
+{% capture system_data %}
+{
+  "1": {
+    "key": "company_type",
+    "value": "Billing",
+    "is_enabled": "true"
+  },
+  "2" : {
+    "key": "company_type",
+    "value": "Competitor",
+    "is_enabled": "true"
+  }, 
+  "3": {
+    "key": "company_type",
+    "value": "Investor",
+    "is_enabled": "true"
+  }, 
+  "4": {
+    "key": "company_type",
+    "value": "Lost Customer",
+    "is_enabled": "true"
+  }, 
+  "5": {
+    "key": "company_type",
+    "value": "Partner",
+    "is_enabled": "true"
+  }, 
+  "6": {
+    "key": "company_type",
+    "value": "Press",
+    "is_enabled": "true"
+  }, 
+  "7": {
+    "key": "company_type",
+    "value": "Prospect",
+    "is_enabled": "true"
+  }, 
+  "8": {
+    "key": "company_type",
+    "value": "Reseller",
+    "is_enabled": "true"
+  }, 
+  "9": {
+    "key": "company_type",
+    "value": "Supplier-Billing Contact",
+    "is_enabled": "true"
+  }, 
+  "10": {
+    "key": "company_type",
+    "value": "Other",
+    "is_enabled": "true"
+  }, 
+  "11": {
+    "key": "contact_type",
+    "value": "Billing",
+    "is_enabled": "true"
+  },
+  "12" : {
+    "key": "contact_type",
+    "value": "Competitor",
+    "is_enabled": "true"
+  }, 
+  "13": {
+    "key": "contact_type",
+    "value": "Investor",
+    "is_enabled": "true"
+  }, 
+  "14": {
+    "key": "contact_type",
+    "value": "Lost Customer",
+    "is_enabled": "true"
+  }, 
+  "15": {
+    "key": "contact_type",
+    "value": "Partner",
+    "is_enabled": "true"
+  }, 
+  "16": {
+    "key": "contact_type",
+    "value": "Press",
+    "is_enabled": "true"
+  }, 
+  "17": {
+    "key": "contact_type",
+    "value": "Prospect",
+    "is_enabled": "true"
+  }, 
+  "18": {
+    "key": "contact_type",
+    "value": "Reseller",
+    "is_enabled": "true"
+  }, 
+  "19": {
+    "key": "contact_type",
+    "value": "Supplier-Billing Contact",
+    "is_enabled": "true"
+  }, 
+  "20": {
+    "key": "contact_type",
+    "value": "Other",
+    "is_enabled": "true"
+  }, 
+  "21": {
+    "key": "industry_type",
+    "value": "Advertising",
+    "is_enabled": "true"
+  }, 
+  "22": {
+    "key": "industry_type",
+    "value": "Aerospace & Defence",
+    "is_enabled": "true"
+  }, 
+  "23": {
+    "key": "industry_type",
+    "value": "Airline",
+    "is_enabled": "true"
+  }, 
+  "24": {
+    "key": "industry_type",
+    "value": "Automotive",
+    "is_enabled": "true"
+  }, 
+  "25": {
+    "key": "industry_type",
+    "value": "Banking",
+    "is_enabled": "true"
+  }, 
+  "26": {
+    "key": "industry_type",
+    "value": "Biotechnology",
+    "is_enabled": "true"
+  }, 
+  "27": {
+    "key": "industry_type",
+    "value": "Business Services",
+    "is_enabled": "true"
+  }, 
+  "28": {
+    "key": "industry_type",
+    "value": "Communications",
+    "is_enabled": "true"
+  }, 
+  "29": {
+    "key": "industry_type",
+    "value": "Computer Peripherals",
+    "is_enabled": "true"
+  }, 
+  "30": {
+    "key": "industry_type",
+    "value": "Electric Utilities",
+    "is_enabled": "true"
+  }
+  , 
+  "31": {
+    "key": "industry_type",
+    "value": "Electronic",
+    "is_enabled": "true"
+  }
+  , 
+  "32": {
+    "key": "industry_type",
+    "value": "Financial Services",
+    "is_enabled": "true"
+  }
+  , 
+  "33": {
+    "key": "industry_type",
+    "value": "Government",
+    "is_enabled": "true"
+  }
+  , 
+  "34": {
+    "key": "industry_type",
+    "value": "Healthcare Facilities",
+    "is_enabled": "true"
+  }
+  , 
+  "35": {
+    "key": "industry_type",
+    "value": "Insurance",
+    "is_enabled": "true"
+  }
+  , 
+  "36": {
+    "key": "industry_type",
+    "value": "Metal Mining",
+    "is_enabled": "true"
+  }
+  , 
+  "37": {
+    "key": "industry_type",
+    "value": "Oil & Gas Operations",
+    "is_enabled": "true"
+  }
+  , 
+  "38": {
+    "key": "industry_type",
+    "value": "Other",
+    "is_enabled": "true"
+  }
+  , 
+  "39": {
+    "key": "industry_type",
+    "value": "Personal & Household Products",
+    "is_enabled": "true"
+  }
+  , 
+  "40": {
+    "key": "industry_type",
+    "value": "Personal Services",
+    "is_enabled": "true"
+  }
+  , 
+  "41": {
+    "key": "industry_type",
+    "value": "Pharmaceutical",
+    "is_enabled": "true"
+  }
+  , 
+  "42": {
+    "key": "industry_type",
+    "value": "Photography",
+    "is_enabled": "true"
+  }
+  , 
+  "43": {
+    "key": "industry_type",
+    "value": "Real Suite",
+    "is_enabled": "true"
+  }, 
+  "44": {
+    "key": "industry_type",
+    "value": "Retail",
+    "is_enabled": "true"
+  }, 
+  "45": {
+    "key": "industry_type",
+    "value": "Tobacco",
+    "is_enabled": "true"
+  }, 
+  "46": {
+    "key": "industry_type",
+    "value": "Water Utilities",
+    "is_enabled": "true"
+  }
+}
+{% endcapture %}
+
+{% assign system_data = system_data | to_hash %}
+{% log "Dummy Data..." system_data %}
+{% log "Starting loop of Dummy Data..." %}
+{% for i in system_data %}
+  {% log i %}
+  {% execute_query 'modules/insites_core/insites_private_add_system_fields', key: i[1].key, value: i[1].value, is_enabled: i[1].is_enabled %}
+{% endfor %}
+{% log "End migration of Dummy Data..." %}

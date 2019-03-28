@@ -1,0 +1,24 @@
+<ins-renderer>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="{{ 'modules/insites_core/insites_admin/scripts/insites_utilities.js' | asset_url }}"></script>
+    <div class="main-module-wrapper">
+    {%- comment -%} Insert liquid check module subscription {%- endcomment -%}
+    <!-- Insites Core -->
+        <div id="insites-core"></div>
+        <script src="{{ 'modules/insites_core/insites_admin/insites/js/chunk-vendors.127ee8dc.js' | asset_url }}"></script>
+        <script src="{{ 'modules/insites_core/insites_admin/insites/js/app.1239d3e0.js' | asset_url }}"></script>
+    <!-- End Insites Core -->
+
+    <!-- Insites Settings & Branding -->
+        {%- include 'modules/insites_settings_and_branding/insites_admin/insites_settings_and_branding_index_dependencies' -%}
+    <!-- End Insites Settings & Branding -->
+
+    <!-- Insites Site Manager -->
+        {%- include 'modules/insites_site_manager/insites_admin/insites_site_manager_index_dependencies' -%}
+    <!-- End Insites Site Manager -->
+
+    <!-- Insites Database -->
+        {%- include 'modules/insites_database/insites_admin/insites_database_index_dependencies' -%}
+    <!-- End Insites Database -->
+    </div>
+</ins-renderer>

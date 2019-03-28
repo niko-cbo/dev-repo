@@ -1,0 +1,33 @@
+mutation insites_update_partial ($id: ID!, $partial_path: String!, $path: String!, $body: String, $format: PageFormat = html) {
+  admin_liquid_partial_update(
+    id: $id,
+    liquid_partial: {
+      path: $partial_path,
+      body: $body,
+      format: $format,
+      physical_file_path: $path
+    }
+  ) {    
+    id
+    path
+    physical_file_path
+    content: body
+  }   
+}
+
+# mutation insites_update_partial {
+#   admin_liquid_partial_update(
+# 	  id: 29451,
+#     liquid_partial: {
+#       path: "layout/sandbox_partial",
+#       body: "<p> updated partial content </p>",
+#       format: html,
+#       physical_file_path: "partials/public/views/partials/layout/sandbox_partial.liquid"
+#     }
+#   ) {    
+#     id
+#     path
+#     physical_file_path
+#     body
+#   }   
+# }

@@ -1,0 +1,9 @@
+---
+name: insites_only_allowed_if_logged_in
+redirect_to: 403
+flash_alert: Please login to continue.
+---
+{% query_graph 'modules/insites_core/current_user', result_name: 'g' %}
+{% if g.current_user %}
+true
+{% endif %} 

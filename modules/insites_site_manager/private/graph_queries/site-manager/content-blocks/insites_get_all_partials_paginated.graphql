@@ -1,0 +1,26 @@
+query insites_get_all_partials_paginated ($id: ID, $page: Int = 1, $size: Int = 1000, $path: StringFilter) {
+  	admin_liquid_partials (
+  		page: $page,
+      per_page: $size,
+      filter: { 
+        id: {
+          value: $id
+        },
+        path: $path
+      }      
+    ) {
+      has_next_page
+      has_previous_page
+      total_entries
+      total_pages
+      per_page
+      current_page
+        results {
+          id
+          format
+         	path
+          physical_file_path
+          body
+        }
+    }  
+}

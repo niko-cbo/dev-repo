@@ -1,0 +1,11 @@
+---
+slug: insites/api/s3-settings-branding-form.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+{% render_form 'modules/insites_settings_and_branding/insites_settings_branding', parent_resource_id: 'modules/insites_settings_and_branding/insites_site_settings' %}

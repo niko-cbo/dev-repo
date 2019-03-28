@@ -1,0 +1,27 @@
+---
+slug: admin/login
+format: html
+layout_name: modules/insites_core/insites_admin/insites_session
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allow_if_no_session
+---
+{%- assign name = 'Insites Admin - Sign In' -%}
+{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
+
+{% if context.flash.notice != blank %}
+  <span id="message" style="display:none">{{ context.flash.notice }}</span>
+  <script>
+    var message = document.getElementById('message').innerText;
+    toastr.options.closeHtml = '<button><i class="icon-close-1"></i></button>';
+    toastr.options.closeButton = false;
+    toastr.options.timeOut = 3000;
+    toastr.options.extendedTimeOut = 1000;
+    toastr.success(message);
+  </script>
+{% endif %} 
+
+{% include_form 'modules/insites_core/insites_admin_sign_in' %}

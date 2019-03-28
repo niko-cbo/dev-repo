@@ -1,0 +1,13 @@
+---
+slug: insites/api/get-global-content-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+ 
+{% query_graph 'modules/insites_site_manager/insites_get_global_content', result_name: 'global_content' %}
+{{ global_content | json }}

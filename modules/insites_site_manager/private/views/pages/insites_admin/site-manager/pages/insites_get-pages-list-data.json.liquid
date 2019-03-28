@@ -1,0 +1,46 @@
+---
+slug: insites/api/get-all-pages-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign id = null %}
+{% assign size = 10 %}
+{% assign page = 1 %}
+{% assign status = "published" %}
+{% assign keyword = null %}
+{% assign id = context.params.id | default: null %}
+{% if id %}
+  {% assign status = null %}
+{% endif %}
+
+{% if context.params.size %}
+  {% assign size = context.params.size | plus: 0 %}
+{% endif %} 
+
+{% if context.params.page %} 
+  {% assign page = context.params.page | plus: 0 %}
+{% endif %}
+
+{% if context.params.status %} 
+  {% assign status = context.params.status %}
+{% endif %}
+
+{% if context.params.keyword %} 
+  {% assign keyword = context.params.keyword %}
+{% endif %}
+
+{% execute_query 'modules/insites_site_manager/insites_get_all_pages_paginated', result_name: 'page_list',
+  id : id,
+  page: page,
+  size: size,
+  status: status,
+  keyword: keyword,
+%}
+
+{{ page_list | json }}

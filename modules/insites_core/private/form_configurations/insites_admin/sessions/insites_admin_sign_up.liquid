@@ -1,0 +1,35 @@
+---
+name: insites_admin_sign_up
+resource: User
+resource_owner: anyone
+redirect_to: admin/login
+fields:
+  email:
+  password:
+  first_name:
+  last_name:
+  profiles:
+    modules/insites_core/insites_administrator:
+      properties:
+        company:
+        is_enabled: 
+            property_options:
+                default: true
+    modules/insites_core/insites_contact_number:
+      properties:
+        work_phone_country_code:
+        work_phone_area_code:
+        work_phone_number:
+callback_actions: |-
+  {% log "insites_admin_sign_up" %}
+  {% query_graph 'modules/insites_core/insites_generate_user_temporary_token', email: form.email, result_name: 'g' %}
+  {% log g %}
+  {% if g.user %}
+  {% execute_query 'modules/insites_core/insites_admin_password_token', id: g.user.id, token: g.user.temporary_token %}
+  {% endif %}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{{ form_builder | json }}

@@ -1,0 +1,59 @@
+---
+name: insites_add_new_company
+resource: Customization
+resource_owner: anyone
+fields:    
+    properties:
+        company_name:
+        is_enabled:
+        assigned_to:
+        website:
+        company_type:
+        industry_type:
+        notes:
+        facebook_link:
+        youtube_link:
+        google_plus_link:
+        twitter_link:
+        linkedin_link:
+        instagram_link:
+        home_phone_country_code:
+        home_phone_area_code:
+        home_phone_number: 
+        mobile_phone_country_code:
+        mobile_phone_area_code:
+        mobile_phone_number:
+        work_phone_country_code:
+        work_phone_area_code:
+        work_phone_number:
+    custom_images:
+        profile_image:
+            image:
+    custom_addresses:     
+        location_1:
+            address:
+            city:
+            state:
+            street:
+            country:
+            postcode:
+        location_2:
+            address:
+            city:
+            state:
+            street:
+            country:
+            postcode:
+        location_3:
+            address:
+            city:
+            state:
+            street:
+            country:
+            postcode:                     
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators      
+---
+
+{{ form_builder.fields.custom_images | json }}

@@ -1,0 +1,24 @@
+mutation insites_set_initial_administrator {  
+  user_create (
+    form_configuration_name: "modules/insites_core/insites_set_administrator",
+    user: {
+      email: "user_default@insites.io",
+      password: "insites.io",
+      first_name: "Insites",
+      last_name: "User"
+      name: "Insites User"
+      profiles: [
+        {
+          name: "modules/insites_core/insites_administrator",
+          values: {
+              properties: [
+                 { name: "is_enabled", value: "true" }
+              ]
+          }
+        }
+      ]
+    }
+  ) {
+    email
+  }   
+}

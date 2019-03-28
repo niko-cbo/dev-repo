@@ -1,0 +1,15 @@
+mutation insites_create_database ($schema: ModelSchemaInputType!) {
+  admin_model_schema_create (
+    model_schema: $schema
+  ) {
+    id
+    name
+    metadata
+    fields: properties {
+      id
+      name
+      attribute_type
+      metadata
+    }
+  }  
+}

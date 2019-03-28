@@ -1,0 +1,15 @@
+mutation insites_private_add_system_fields ($key: String, $value: String, $is_enabled: String) {
+  customization_create(
+    form_configuration_name:"modules/insites_core/insites_private_add_system_fields"
+    customization: {
+      	custom_model_type_name: "modules/insites_core/insites_system_fields"
+      	properties: [
+          	{name:"key", value: $key}
+          	{name:"value", value: $value}
+          	{name:"is_enabled", value: $is_enabled}
+        ] 
+    } 
+  ){
+    id    
+  }
+}

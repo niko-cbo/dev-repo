@@ -1,0 +1,39 @@
+---
+slug: insites/api/get-all-layouts-data.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
+
+{% assign size = 10 %}
+{% assign page = 1 %}
+{% assign id = context.params.id | default: null %}
+
+{% if context.params.size %}
+  {% assign size = context.params.size | plus: 0 %}
+{% endif %} 
+
+{% if context.params.page %} 
+  {% assign page = context.params.page | plus: 0 %}
+{% endif %}
+
+{% if context.params.path and context.params.path != ""  %}
+  {% parse_json path %}
+    {
+      "value": "layouts/{{ context.params.path }}"
+    }
+  {% endparse_json %}
+{% endif %}
+
+{% execute_query 'modules/insites_site_manager/insites_get_all_layouts_paginated', result_name: 'layout_list',
+  id: id,
+  page: page,
+  size: size,
+  path: path
+%}
+
+{{ layout_list | json }}

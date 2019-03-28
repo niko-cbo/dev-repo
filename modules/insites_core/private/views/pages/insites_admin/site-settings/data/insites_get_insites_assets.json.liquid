@@ -1,0 +1,16 @@
+---
+slug: insites/api/insites_assets.json
+searchable: false
+metadata: {
+  insites: "true"
+}
+---
+
+{% capture data %}
+{
+    "ins_icon": "{{ 'modules/insites_core/insites_admin/images/insites_logo_icon.svg' | asset_url }}",
+    "ins_logo": "{{ 'modules/insites_core/insites_admin/images/Insites_logo.svg' | asset_url }}"
+}
+{% endcapture %}
+
+{{ data }}

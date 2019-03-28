@@ -1,0 +1,28 @@
+---
+name: insites_mutate_vcl_user_profile
+resource: User
+resource_owner: anyone
+redirect_to: #
+fields:
+  email:
+    property_options:
+      readonly: true
+  profiles:
+    modules/insites_site_manager/insites_vcl_user_profile:
+      properties:
+        instance_url:
+        insites_key:
+        last_update_by:
+        is_enabled:
+      enabled:
+        property_options:
+          default: true
+          readonly: true
+      validation:
+        presence: true
+    validation:
+      presence: true
+authorization_policies:
+  - modules/insites_core/insites_only_allowed_if_logged_in
+  - modules/insites_core/insites_only_allowed_by_administrators
+---
